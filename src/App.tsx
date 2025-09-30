@@ -112,6 +112,9 @@ export const App: React.FC = () => {
       setTodos([...todos, addTodoPost]);
     } catch (error) {
       setErrorMessage(ErrorMessage.AddError);
+            setTimeout(() => {
+        setErrorMessage(ErrorMessage.Empty);
+      }, 3000);
     } finally {
       setLoading(false);
       setTempTodo(null);
@@ -126,6 +129,10 @@ export const App: React.FC = () => {
       await deleteTodoApi(id);
     } catch (error) {
       setErrorMessage(ErrorMessage.DeleteError);
+            setTimeout(() => {
+        setErrorMessage(ErrorMessage.Empty);
+      }, 3000);
+
       return null;
     } finally {
       setDeleteTodoId(null);
