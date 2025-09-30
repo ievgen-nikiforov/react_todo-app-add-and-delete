@@ -128,7 +128,6 @@ export const App: React.FC = () => {
     try {
       await deleteTodoApi(id);
 
-      // ✅ remove only if API call succeeded
       setTodos(prev => prev.filter(todo => todo.id !== id));
     } catch (error) {
       setErrorMessage(ErrorMessage.DeleteError);
@@ -367,16 +366,17 @@ export const App: React.FC = () => {
             </nav>
 
             {/* this button should be disabled if there are no completed todos */}
-            {isAnyCompleted && (
+
               <button
                 type="button"
                 className="todoapp__clear-completed"
                 data-cy="ClearCompletedButton"
                 onClick={() => deleteCompleted()}
+                disabled={!isAnyCompleted }
               >
                 Clear completed
               </button>
-            )}
+
           </footer>
         ) : (
           ''
