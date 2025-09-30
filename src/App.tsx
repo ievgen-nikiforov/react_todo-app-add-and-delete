@@ -77,7 +77,7 @@ export const App: React.FC = () => {
       inputRef.current.focus();
     }
   }, [loading]);
-    const findCompletedTodos = () => {
+  const findCompletedTodos = () => {
     setIsAnyCompleted(todos.some(todo => todo.completed));
   };
   useEffect(() => {
@@ -112,9 +112,12 @@ export const App: React.FC = () => {
       setTodos([...todos, addTodoPost]);
     } catch (error) {
       setErrorMessage(ErrorMessage.AddError);
-            setTimeout(() => {
+      setTimeout(() => {
         setErrorMessage(ErrorMessage.Empty);
       }, 3000);
+      setLoading(false);
+      setTempTodo(null);
+      return null;
     } finally {
       setLoading(false);
       setTempTodo(null);
@@ -129,7 +132,7 @@ export const App: React.FC = () => {
       await deleteTodoApi(id);
     } catch (error) {
       setErrorMessage(ErrorMessage.DeleteError);
-            setTimeout(() => {
+      setTimeout(() => {
         setErrorMessage(ErrorMessage.Empty);
       }, 3000);
 
