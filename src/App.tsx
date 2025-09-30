@@ -108,22 +108,19 @@ export const App: React.FC = () => {
 
     try {
       const addTodoPost: Todo = await addTodoApi(newTemp);
-
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
       setTodos([...todos, addTodoPost]);
     } catch (error) {
       setErrorMessage(ErrorMessage.AddError);
       setTimeout(() => {
         setErrorMessage(ErrorMessage.Empty);
       }, 3000);
-      setLoading(false);
-      setTempTodo(null);
       return null;
     } finally {
       setLoading(false);
       setTempTodo(null);
-      if (inputRef.current) {
-        inputRef.current.value = '';
-      }
     }
   };
   const deleteTodo = async (id: number) => {
