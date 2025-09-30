@@ -77,6 +77,9 @@ export const App: React.FC = () => {
       inputRef.current.focus();
     }
   }, [loading]);
+    const findCompletedTodos = () => {
+    setIsAnyCompleted(todos.some(todo => todo.completed));
+  };
   useEffect(() => {
     selectNewFilter(selectedFilter);
     findCompletedTodos();
@@ -129,9 +132,7 @@ export const App: React.FC = () => {
       setTodos(prev => prev.filter(todo => todo.id !== id));
     }
   };
-  const findCompletedTodos = () => {
-    setIsAnyCompleted(todos.some(todo => todo.completed));
-  };
+
   const deleteCompleted = async () => {
     await Promise.all(
       todos.filter(todo => todo.completed).map(todo => deleteTodo(todo.id)),
