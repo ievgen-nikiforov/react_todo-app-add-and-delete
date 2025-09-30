@@ -127,6 +127,9 @@ export const App: React.FC = () => {
     setDeleteTodoId(id);
     try {
       await deleteTodoApi(id);
+
+      // ✅ remove only if API call succeeded
+      setTodos(prev => prev.filter(todo => todo.id !== id));
     } catch (error) {
       setErrorMessage(ErrorMessage.DeleteError);
       setTimeout(() => {
@@ -136,7 +139,6 @@ export const App: React.FC = () => {
       return null;
     } finally {
       setDeleteTodoId(null);
-      setTodos(prev => prev.filter(todo => todo.id !== id));
     }
   };
 
