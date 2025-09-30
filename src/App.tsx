@@ -76,7 +76,7 @@ export const App: React.FC = () => {
     if (!loading && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [loading]);
+  }, [loading, todos]);
   const findCompletedTodos = () => {
     setIsAnyCompleted(todos.some(todo => todo.completed));
   };
